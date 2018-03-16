@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+
+    <changeSet id="00000000000004" author="samson">
+        <createTable tableName="Pledge">
+            <column name="firstName" type="varchar(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="middleName" type="varchar(20)"/>
+            <column name="lastName" type="varchar(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="major" type="varchar(40)"/>
+            <column name="gradYear" type="year(4)"/>
+            <column name="nickname" type="varchar(50)"/>
+            <column name="class" type="varchar(25)"/>
+            <column name="homestate" type="varchar(50)"/>
+            <column name="hometown" type="varchar(25)"/>
+            <column name="email" type="varchar(100)"/>
+            <column name="preferredName" type="varchar(50)"/>
+            <column name="big" type="int(11)"/>
+
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseColumnNames="big"
+                                 baseTableName="Brother"
+                                 constraintName="fk_big"
+                                 referencedColumnNames="rollNumber"
+                                 referencedTableName="Brother"/>-->
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/pledges.csv"
+                  separator=";"
+                  tableName="Pledge">
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
